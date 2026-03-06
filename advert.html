@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Трилобит — верни себе прошлое!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard', cursive, sans-serif;
+            color: #e1d89d;
+            line-height: 1.5;
+            padding: 15px;
+            
+            background-image: url('15534387915c979847148d61.09275089.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+            transition: background-color 0.3s;
+        }
+
+        /* ===== ТЁМНАЯ ТЕМА ===== */
+        body.dark-theme {
+            color: #2c3e50;
+        }
+
+        body.dark-theme::before {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        body.dark-theme header,
+        body.dark-theme main,
+        body.dark-theme footer {
+            background-color: rgba(240, 240, 240, 0.9);
+            border-color: #2c3e50;
+            color: #2c3e50;
+        }
+
+        body.dark-theme h1,
+        body.dark-theme h2,
+        body.dark-theme h3 {
+            color: #2c3e50;
+            text-shadow: 2px 2px 0 #95a5a6;
+        }
+
+        body.dark-theme .reason-card,
+        body.dark-theme .review-item {
+            background-color: rgba(52, 73, 94, 0.9);
+            color: #ecf0f1;
+            border-color: #3498db;
+        }
+
+        body.dark-theme .slogan {
+            background: linear-gradient(145deg, rgba(52, 152, 219, 0.9), rgba(155, 89, 182, 0.9));
+            color: #ecf0f1;
+            border-color: #f1c40f;
+        }
+
+        body.dark-theme .side-ad {
+            border-color: #3498db;
+        }
+
+        body.dark-theme .side-ad::before {
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        body.dark-theme .footer-links a {
+            background: #34495e;
+            color: #ecf0f1;
+        }
+
+        body.dark-theme .review-form {
+            background: rgba(52, 73, 94, 0.9);
+        }
+
+        body.dark-theme .review-author {
+            color: #3498db;
+        }
+
+        /* Кнопка переключения темы */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 15px 25px;
+            background: #4d3e2b;
+            color: #ffd700;
+            border: 4px solid #b8860b;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 5px 5px 0 #2c1810;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            background: #6b4f34;
+        }
+
+        body.dark-theme .theme-toggle {
+            background: #3498db;
+            color: #2c3e50;
+            border-color: #2980b9;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            text-align: center;
+            color: #f5c542;
+            text-shadow: 3px 3px 0 #a0522d;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-left: 10px solid #c49a6c;
+            padding-left: 20px;
+            margin: 30px 0 20px 0;
+            color: #f0b27a;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            .flex-container {
+                flex-direction: column;
+            }
+        }
+
+        header, main, footer {
+            background-color: rgba(59, 94, 75, 0.85);
+            padding: 25px;
+            border: 4px solid #b8860b;
+            box-shadow: 10px 10px 0 rgba(74, 44, 26, 0.8);
+            margin-bottom: 25px;
+            backdrop-filter: blur(3px);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .side-ad {
+            font-weight: bold;
+            padding: 25px 15px;
+            text-align: center;
+            border: 6px dashed #ffd700;
+            font-size: 1.1rem;
+            box-shadow: 8px 8px 0 #4a2c1a;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            
+            color: white;
+            text-shadow: 3px 3px 0 #000, 2px 2px 5px black;
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            position: relative;
+            z-index: 1;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            transition: border-color 0.3s;
+        }
+
+        .side-ad::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+            transition: background-color 0.3s;
+        }
+
+        .side-ad > * {
+            position: relative;
+            z-index: 2;
+            max-width: 100%;
+        }
+
+        .side-ad p {
+            transform: rotate(-1deg);
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 30px;
+            margin: 10px 0;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            border-bottom: none;
+        }
+
+        .reason-card {
+            background-color: rgba(106, 78, 58, 0.9);
+            border: 3px solid #c99e6e;
+            padding: 20px;
+            border-radius: 40px 0 40px 0;
+            flex: 1 1 160px;
+            min-width: 160px;
+            transition: all 0.2s;
+            box-shadow: 5px 5px 0 #2a3b2e;
+            backdrop-filter: blur(2px);
+        }
+
+        .reason-card:hover {
+            transform: scale(1.02) rotate(1deg);
+            background-color: rgba(126, 95, 72, 0.95);
+        }
+
+        .slogan {
+            background: linear-gradient(145deg, rgba(240, 230, 140, 0.9), rgba(244, 164, 96, 0.9));
+            color: #2c1810;
+            padding: 15px 25px;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            border: 8px double #ff4500;
+            margin: 30px 0;
+            transform: skewX(-5deg) rotate(-1deg);
+            box-shadow: 12px 12px 0 #5a3927;
+            word-break: break-word;
+            backdrop-filter: blur(2px);
+        }
+
+        .slogan small {
+            font-size: 1rem;
+            display: block;
+            transform: skewX(5deg);
+        }
+
+        .relative-container {
+            position: relative;
+            padding: 20px;
+            background: rgba(63, 104, 82, 0.8);
+            margin: 40px 0;
+            border: 3px dotted #bdb76b;
+            backdrop-filter: blur(2px);
+        }
+
+        .absolute-label {
+            position: absolute;
+            top: -15px;
+            right: 10px;
+            background: red;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            transform: rotate(5deg);
+            font-size: 0.9rem;
+            border: 2px solid white;
+        }
+
+        .footer-links a {
+            display: inline-block;
+            background: #7a4f2e;
+            color: #ffdead;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 15px;
+            text-decoration: none;
+            border: 2px solid #c2a275;
+            transition: background-color 0.3s;
+        }
+
+        .footer-links a:hover {
+            background: #9b6e47;
+        }
+
+        .trilobite-img {
+            text-align: center;
+            line-height: 1.2;
+            filter: drop-shadow(10px 10px 0 #3b280f);
+            background: rgba(88, 123, 99, 0.7);
+            border-radius: 60px 60px 30px 30px;
+            padding: 20px;
+            border: 8px ridge #8b5a2b;
+            margin: 20px 0;
+            backdrop-filter: blur(2px);
+        }
+
+        .trilobite-img img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 30px;
+            border: 8px ridge #8b5a2b;
+            box-shadow: 10px 10px 0 #3b280f;
+        }
+
+        /* ===== ЛЕНТА ОТЗЫВОВ ===== */
+        .reviews-feed {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 30px;
+        }
+
+        .review-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 25px;
+            background: rgba(74, 44, 26, 0.8);
+            border: 4px solid #b8860b;
+            transition: background-color 0.3s;
+        }
+
+        .review-form input,
+        .review-form textarea {
+            padding: 12px;
+            border: 3px solid #c49a6c;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .review-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .review-form button {
+            padding: 15px;
+            background: #4d3e2b;
+            color: #ffd700;
+            border: 4px solid #b8860b;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .review-form button:hover {
+            transform: scale(1.02);
+            background: #6b4f34;
+        }
+
+        .review-item {
+            background-color: rgba(106, 78, 58, 0.9);
+            border: 3px solid #c99e6e;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+            border-radius: 40px 0 40px 0;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+            padding-left: 40px;
+        }
+
+        .review-text {
+            font-style: italic;
+        }
+
+        .review-date {
+            font-size: 0.8rem;
+            color: #aaa;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        h2 + p {
+            font-style: italic;
+            color: #f1d592;
+            padding-left: 10px;
+        }
+        article > h2 {
+            border-bottom: 3px solid #b8860b;
+            padding-bottom: 8px;
+        }
+        #description h2 ~ div {
+            border: 1px solid #a67b5b;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ТРИЛОБИТ</h1>
+    <p style="text-align: center; font-style: italic;">— Древний питомец для современного человека! —</p>
+    <div style="position: sticky; top: 0; background: #4d3e2b; padding: 5px; border-radius: 20px; text-align: center; z-index: 100;">
+        ⚡ СКОРО ВСЁ РАСКУПЯТ! ⚡
+    </div>
+</header>
+
+<main>
+    <section class="slogan">
+        ТРИЛОБИТ — ТВОЙ ДРЕВНИЙ ДРУГ!
+        <small>Он пережил динозавров и переживёт твою кредитку!</small>
+    </section>
+
+    <article id="reasons">
+        <h2>🔥 ТОП-5 ПРИЧИН ВЗЯТЬ ТРИЛОБИТА 🔥</h2>
+        <div class="flex-container">
+            <div class="reason-card"><strong>1.</strong> Не надо выгуливать — он и так уже вымер, лежит камнем.</div>
+            <div class="reason-card"><strong>2.</strong> Идеальный страж для рассады: своим видом отпугивает кротов и соседей.</div>
+            <div class="reason-card"><strong>3.</strong> Экологичен: не ест, не какает, не требует вай-фая.</div>
+            <div class="reason-card"><strong>4.</strong> Модный аксессуар: все носят аирподсы, а ты — окаменелость.</div>
+            <div class="reason-card"><strong>5.</strong> Умеет притворяться камнем сотни миллионов лет — отличный навык для посиделок с тёщей.</div>
+        </div>
+    </article>
+
+    <div class="grid-layout">
+        <aside class="side-ad" style="background-image: url('1b6df1b4033d0118c97641fc68bd68f0.jpg'); border: 2px solid #ffd700; text-decoration: none;">
+            <p style="text-decoration: none; border-bottom: none;"> ПРИВЕТ, ПУПСИК</p>
+            <p style="text-decoration: none; border-bottom: none; font-size: 0.9rem; background-color: rgba(255, 0, 0, 0.5);">
+        ПАВУРА <span style="animation: blink 1s infinite;"></span> 300 СВЕТОВЫХ ЛЕТ ОТ ВАС
+    </p>
+    <p style="text-decoration: none; border-bottom: none; font-size: 0.8rem; opacity: 0.7;">
+        (Ищет техножреца)
+    </p>
+        </aside>
+
+        <div>
+            <section id="description">
+                <h2>КТО ТАКОЙ ТРИЛОБИТ?</h2>
+                <div class="trilobite-img">
+                    <img src="trilobite.jpg" alt="Наш трилобит во всей красе">
+                    <div style="font-size: 1rem; margin-top: 15px; font-style: italic;">(Реконструкция эксперта)</div>
+                </div>
+                <p><strong>Трилобит</strong> — это членистоногое, которое правило морями 500 млн лет назад. Теперь ты можешь править балом, имея его копию! Полная биологическая совместимость с любым интерьером в стиле "пещерный минимализм".</p>
+                <div class="relative-container">
+                    <div class="absolute-label">NEW!</div>
+                    <p style="font-size: 1.3rem;">✨ Научно доказано: 9 из 10 трилобитов рекомендуют себя сами. ✨</p>
+                </div>
+            </section>
+
+            <!-- ===== ЛЕНТА ОТЗЫВОВ ===== -->
+            <section class="reviews-feed" id="reviews-feed">
+                <h2>ЕЩЁ БОЛЬШЕ ОТЗЫВОВ</h2>
+                
+                <!-- Контейнер для отзывов -->
+                <div id="reviews-container"></div>
+
+                <!-- Форма добавления отзыва -->
+                <form id="review-form" class="review-form">
+                    <h3>Оставь свой отзыв (получи скидку 5% на кремний)!</h3>
+                    <input type="text" id="review-name" placeholder="Твоё имя" required>
+                    <textarea id="review-text" placeholder="Твой отзыв (не менее 10 символов)" required></textarea>
+                    <div class="error-message" id="form-error"></div>
+                    <button type="submit">📝 ОТПРАВИТЬ ОТЗЫВ</button>
+                </form>
+            </section>
+        </div>
+
+        <aside class="side-ad" style="background-image: url('85dbaee1b19b49bb5754fba584398cb2.jpg'); border: 2px solid #ffd700; text-decoration: none;">
+            <p style="text-decoration: none; border-bottom: none;">БЖЖБЖБЖЖБЖ</p>
+            <p style="text-decoration: none; border-bottom: none; font-size: 0.9rem; background-color: rgba(255, 165, 0, 0.5);">
+        ПЧЕЛА-ТРИЛОБИТ ГИБРИД
+    </p>
+        </aside>
+    </div>
+
+    <div class="slogan" style="transform: rotate(1deg) scale(0.98);">
+        🎉 ТРИЛОБИТ В КАЖДЫЙ ДОМ! 🎉
+        <small>Если у вас нет трилобита — вы живёте в прошлом!</small>
+    </div>
+</main>
+
+<footer>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <div style="font-size: 0.9rem;">
+            © 2026 ООО "Древние твари"
+        </div>
+        <div class="footer-links">
+            <a href="#">Купить</a>
+            <a href="#">Подписаться</a>
+            <a href="#">Страшилка</a>
+            <a href="#">Контакты</a>
+        </div>
+    </div>
+    <p style="text-align: center; margin-top: 20px; border-top: 2px solid #8b5a2b; padding-top: 15px;">
+        * Скебоб
+    </p>
+</footer>
+
+<button class="theme-toggle" id="theme-toggle">🌙 ТЕМА НЕГАТИВЧИК</button>
+
+<script>
+    const defaultReviews = [
+        {
+            id: 1,
+            name: 'Иван',
+            text: 'Купил трилобита, а он оказался обычным камнем с глазами. Но камень классный, не выкидываю!',
+            date: new Date('2026-02-15'),
+            avatar: '🪨'
+        },
+        {
+            id: 2,
+            name: 'Елена',
+            text: 'Пыталась накормить, но он не ест уже 4 месяца. Видимо, привыкает к домашней обстановке.',
+            date: new Date('2026-02-18'),
+            avatar: '🦷'
+        },
+        {
+            id: 3,
+            name: 'Дмитрий',
+            text: 'Мой трилобит подружился с моим кактусом. Они молчат вместе уже неделю. Прелестно!',
+            date: new Date('2026-02-20'),
+            avatar: '🦕'
+        },
+        {
+            id: 4,
+            name: 'ООО "ПалеоЛюб"',
+            text: 'Заказали оптом 100 штук для корпоратива. Все сотрудники довольны, никто не опоздал на утреннее совещание!',
+            date: new Date('2026-02-22'),
+            avatar: '🏢'
+        },
+        {
+            id: 5,
+            name: 'Ноунейм 46766437.87',
+            text: 'ПРИВЕТ, ПУПСИК! БЖЖБЖБЖЖБЖ! Трилобит лучший!',
+            date: new Date('2026-02-25'),
+            avatar: '🐚'
+        }
+    ];
+
+    let reviews = JSON.parse(localStorage.getItem('trilobiteReviews')) || defaultReviews;
+
+    function displayReviews() {
+        const container = document.getElementById('reviews-container');
+        if (!container) return;
+
+        container.innerHTML = '';
+        
+        const sortedReviews = [...reviews].sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        sortedReviews.forEach(review => {
+            const reviewElement = document.createElement('div');
+            reviewElement.className = 'review-item';
+            
+            const date = new Date(review.date);
+            const formattedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+            
+            reviewElement.innerHTML = `
+                <div style="font-size: 2rem; position: absolute; left: -15px; top: -15px; background: #b8860b; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 3px solid #ffd700;">
+                    ${review.avatar || '👤'}
+                </div>
+                <div class="review-author">${review.name}</div>
+                <div class="review-text">${review.text}</div>
+                <div class="review-date">${formattedDate}</div>
+            `;
+            
+            container.appendChild(reviewElement);
+        });
+    }
+
+    function validateReview(name, text) {
+        if (!name || name.trim().length < 2) {
+            return 'Имя должно содержать минимум 2 символа';
+        }
+        if (!text || text.trim().length < 10) {
+            return 'Текст отзыва должен содержать минимум 10 символов';
+        }
+        return null;
+    }
+
+    document.getElementById('review-form')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nameInput = document.getElementById('review-name');
+        const textInput = document.getElementById('review-text');
+        const errorDiv = document.getElementById('form-error');
+        
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+        
+        const error = validateReview(name, text);
+        if (error) {
+            errorDiv.textContent = error;
+            return;
+        }
+        
+        errorDiv.textContent = '';
+        
+        const avatars = ['🪨', '🦷', '🦕', '🐚', '🌿', '⭐', '💀', '👻', '🐛', '🦂'];
+        
+        const newReview = {
+            id: Date.now(),
+            name: name,
+            text: text,
+            date: new Date(),
+            avatar: avatars[Math.floor(Math.random() * avatars.length)]
+        };
+        
+        reviews.unshift(newReview);
+        localStorage.setItem('trilobiteReviews', JSON.stringify(reviews));
+        
+        // Очищаем форму
+        nameInput.value = '';
+        textInput.value = '';
+        
+        displayReviews();
+        
+        alert('Твоя скидка 5% уже активирована (нет, но ты держись)');
+    });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Проверяем сохранённую тему в localStorage
+    if (localStorage.getItem('trilobiteTheme') === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.textContent = '☀️ ТЕМА ПОЗИТИВЧИК';
+    }
+    
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-theme');
+        
+        if (document.body.classList.contains('dark-theme')) {
+            themeToggle.textContent = '☀️ ТЕМА ПОЗИТИВЧИК';
+            localStorage.setItem('trilobiteTheme', 'dark');
+        } else {
+            themeToggle.textContent = '🌙 ТЕМА НЕГАТИВЧИК';
+            localStorage.setItem('trilobiteTheme', 'light');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        displayReviews();
+    });
+</script>
+
+</body>
+</html>
