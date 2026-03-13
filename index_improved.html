@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-image: url('file_0000000092bc72468a47a41a48b1fdb6.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #1e1e2f;
+            padding: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-left: 2px solid #6a6a6a;
+            border-right: 2px solid #6a6a6a;
+            background-color: rgb(26, 26, 26);
+            box-shadow: 0 25px 50px -12px rgb(0, 0, 0);
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0rem;    
+            left: 15.5rem;   
+            right: 15.5rem;  
+            bottom: 0rem; 
+            background: rgb(26, 26, 26);
+            z-index: -1;
+            pointer-events: none;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        header {
+            background: linear-gradient(145deg, #df3030 0%, #812d43 100%);
+            padding: 2rem 2rem 1.8rem 2rem;
+            clip-path: polygon(
+                20px 0,
+                calc(100% - 20px) 0,
+                100% 20px, 
+                100% calc(100% - 20px),
+                calc(100% - 20px) 100%, 
+                20px 100%,
+                0 calc(100% - 20px),
+                0 20px 
+            );
+            margin-bottom: 2.5rem;
+            border-bottom: 4px solid #200000;
+            box-shadow: 0 10px 15px -3px rgb(31, 0, 0), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            transition: all 0.2s ease;
+        }
+
+        header:hover {
+            border-bottom-color: #ef4444;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #0a0a23;
+            text-shadow: 2px 2px 0 rgba(59, 130, 246, 0.1);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h1::before {
+            content: '⚙️';
+            font-size: 2.5rem;
+            display: inline-block;
+            animation: spin 4s linear infinite;
+            filter: drop-shadow(0 2px 2px rgb(0, 0, 0));
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2.2rem 0 1.2rem 0;
+            position: relative;
+            display: inline-block;
+            color: #111827;
+            border-bottom: 3px dashed #3b3b3b;
+            padding-bottom: 0.4rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        section {
+            background-color: #c6c6c6;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.5rem;
+            clip-path: polygon(
+                20px 0,
+                calc(100% - 20px) 0,
+                100% 20px, 
+                100% calc(100% - 20px),
+                calc(100% - 20px) 100%, 
+                20px 100%,
+                0 calc(100% - 20px),
+                0 20px 
+            );
+            border: 1px solid #2c0909;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        article {
+            background: #fffdf9;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 6px solid #f59e0b;
+            border-right: 1px solid #fffdf9;
+            transition: transform 0.15s ease, border-color 0.2s;
+        }
+
+        article:hover {
+            transform: scale(1.01);
+            background: #fffdf9;
+        }
+
+        figure {
+            margin: 1.2rem 0;
+            padding: 0.8rem;
+            background: #ffffff;
+            display: inline-block;
+            max-width: 100%;
+            border: 1px solid #563d3d0f;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.596);
+        }
+
+        figcaption {
+            font-size: 0.9rem;
+            color: #334155;
+            margin-top: 0.5rem;
+            font-style: italic;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ffffff;
+            background: #fffdf9;
+            object-fit: cover;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 1.8rem;
+            padding-left: 0.5rem;
+        }
+
+        li {
+            margin: 0.7rem 0;
+            font-size: 1.1rem;
+            list-style-type: square;
+            color: #1e293b;
+        }
+
+        ol li {
+            list-style-type: decimal;
+            font-weight: 500;
+        }
+
+        li::marker {
+            color: #911919;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1rem;
+            background: white;
+            overflow: hidden;
+            box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        caption {
+            text-align: left;
+            font-weight: 600;
+            background: #e8e8e8;
+            padding: 0.8rem 1rem;
+            caption-side: top;
+            font-size: 1.2rem;
+            color: #0e0929;
+        }
+
+        thead {
+            background-color: #3b1e1e;
+            color: white;
+        }
+
+        th {
+            padding: 1rem 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            background-color: #0f172a;
+        }
+
+        td {
+            padding: 1rem 0.8rem;
+            border-bottom: 1px solid #ffffff;
+            text-align: center;
+            background-color: #f8fafc;
+        }
+
+        tbody tr:nth-child(even) td {
+            background-color: #f1f5f9;
+        }
+
+        tbody tr:hover td {
+            background-color: #c2c2c2;
+            transition: 0.1s;
+        }
+
+        blockquote {
+            background: #f3f4f6;
+            padding: 1.5rem 2rem;
+            font-style: italic;
+            clip-path: polygon(
+                0 20px,
+                20px 0,
+                100% 0,
+                100% calc(100% - 20px),
+                calc(100% - 20px) 100%,
+                0 100%
+            );
+            border-left: 6px solid #eb252c;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+            margin: 1.5rem 0;
+            font-size: 1.15rem;
+            color: #1f2937;
+        }
+
+        blockquote footer {
+            margin-top: 1rem;
+            font-weight: 600;
+            text-align: right;
+            color: #4b5563;
+            font-style: normal;
+        }
+
+        .review {
+            background: linear-gradient(112deg, #fdecec, #fdecec);
+            border: 1px solid #d56b6b;
+            padding: 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .review p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .rating {
+            color: #b45309;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .media-description {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            background: #fdecec;
+            padding: 1.5rem;
+            align-items: center;
+            border: 2px solid #d56b6b;
+        }
+
+        .media-text {
+            flex: 2 1 260px;
+        }
+
+        .media-thumb {
+            flex: 1 1 160px;
+            text-align: center;
+        }
+
+        .match-time {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            background: #dc2626;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            display: inline-block;
+            font-size: 0.85rem;
+        }
+
+        .score {
+            font-weight: 700;
+            background: #059669;
+            color: white;
+            padding: 0.2rem 0.8rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            text-align: center;
+            clip-path: polygon(
+                0 20px,
+                20px 0,
+                100% 0,
+                100% calc(100% - 20px),
+                calc(100% - 20px) 100%,
+                0 100%
+            );
+            border-top: 2px solid #e2e8f0;
+            font-size: 0.95rem;
+            color: #475569;
+            background: #f8fafc;
+        }
+
+        footer address {
+            font-style: normal;
+        }
+
+        .anecdote-grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: space-between;
+        }
+
+        .anecdote-card {
+            flex: 1 1 240px;
+            background: #ffffff;
+            padding: 1rem;
+            border: 1px solid #ddd;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border: none;
+            border-top: 2px dotted #cbd5e1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #571c1c;
+            color: white;
+            padding: 0.15rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .fine-print {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.65rem;
+            color: #080808;
+            background: rgba(243, 244, 246, 0.5);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .fine-item {
+            transition: color 0.2s;
+        }
+
+        .fine-item:hover {
+            color: #0d0707;
+        }
+
+        .game-section {
+            background: linear-gradient(145deg, #2a1f1f, #1a1212);
+            border: 4px solid #b8860b;
+            padding: 30px;
+            margin: 20px 0 40px 0;
+            text-align: center;
+            box-shadow: 15px 15px 0 #2c1810;
+        }
+
+        .game-section h2 {
+            color: #ffd700;
+            text-shadow: 3px 3px 0 #8b4513;
+            border-bottom: none;
+            margin-top: 0;
+        }
+
+        .game-section p {
+            color: #e1d89d;
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .game-button {
+            display: inline-block;
+            background: linear-gradient(145deg, #4a1e2b, #2d0f17);
+            color: #ffd700;
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding: 1rem 3rem;
+            border: 6px solid #b8860b;
+            cursor: pointer;
+            box-shadow: 10px 10px 0 #1a0a0a;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .game-button:hover {
+            transform: scale(1.02) rotate(-1deg);
+            background: linear-gradient(145deg, #5f2635, #3d1420);
+            box-shadow: 12px 12px 0 #1a0a0a;
+        }
+
+        .dummy-styles-1 { opacity: 0; position: absolute; pointer-events: none; }
+        .dummy-styles-2 { transition: none; transform: none; animation: none; }
+        .dummy-styles-3 { border-top-left-radius: 1px; border-bottom-right-radius: 2px; }
+        .dummy-styles-4 { flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; }
+        .dummy-styles-5 { grid-template-columns: repeat(1, 1fr); gap: 0; }
+        .dummy-styles-6 { backdrop-filter: blur(0px); clip-path: none; mask: none; }
+        .dummy-styles-7 { user-select: auto; pointer-events: auto; resize: none; }
+        .dummy-styles-8 { list-style-position: inside; list-style-type: disc; }
+        .dummy-styles-9 { text-overflow: ellipsis; overflow-wrap: break-word; }
+        .dummy-styles-10 { quotes: "«" "»"; counter-reset: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Фанатский уголок: здесь странненько, но весело</h1>
+        <p><strong>анекдоты, личное мнение, цитаты и даже <em>расписание аутсайдера РПЛ</em> (команда №16)</strong></p>
+    </header>
+
+    <div class="game-section">
+        <h2>⚔️ ВЕРБОВКА В КОСМОДЕСАНТ ⚔️</h2>
+        <p>
+            Пройди испытание и стань защитником Империума!<br>
+        </p>
+        <button class="game-button" onclick="startSpaceMarineRecruitment()">
+            НАЧАТЬ ИСПЫТАНИЕ
+        </button>
+    </div>
+
+    <main>
+        <section>
+            <h2>Анекдоты дня (шёл 40 157 год)</h2>
+            <div class="anecdote-grid">
+                <article class="anecdote-card">
+                    <figure>
+                        <img src="i (1).webp"
+                             alt="Решающий бой">
+                    </figure>
+                    <p>Идет финальная битва с боссом. Осталось 1% здоровья у босса и 1 HP у игрока. 
+                        И тут в комнату заходит мама и выдергивает провод из розетки, чтобы пылесос включить. <br>
+                        — Мама! Ты понимаешь, что сейчас откатила мою жизнь на 3 часа назад?! <br>
+                        — Ничего, вот вырастешь — узнаешь, что жизнь — это хардкорный режим без сохранений. <br>
+                        — В таком случае, можно я пересоздам персонажа?
+                    </p>
+                </article>
+                <article class="anecdote-card">
+                    <figure>
+                        <img src="4333046e1f9996928bb9fe13aab7fc67.jpg"
+                             alt="АД">
+                    </figure>
+                    <p>— Добро пожаловать в ад, пароль на Wi-Fi - это...<br>
+                        — Постой, у вас есть Wi-Fi?<br>
+                        — Конечно.<br>
+                        — Ну, всё не так уж и плохо.<br>
+                        — Как я уже сказал, пароль на Wi-Fi - число Пи.
+                    </p>
+                </article>
+
+                <article class="anecdote-card">
+                    <figure>
+                        <img src="e9390d0074aa3744f178f4f8651d2242.jpg"
+                             alt="За Императора!">
+                    </figure>
+                    <p>
+                        Опытный гвардеец учит новобранца уму-разуму в окопе, пока над головой свистят снаряды.<br>
+                        — Значит так, салага. Главное в бою — это вера в Императора.<br>
+                        — Так точно!<br>
+                        — Твой лазган — говно, он греется, и им можно убить разве что комара на минимальной дистанции. Но он твой лучший друг.<br>
+                        — Есть!<br>
+                        — Не подпускай к себе культистов. Они хоть и дохнут с одного попадания, но их много, а у тебя один рожок.<br>
+                        — Понял!<br>
+                        — Если увидишь Космодесантника Хаоса — молись.<br>
+                        — А если увижу обычного?<br>
+                        — Молись дважды. Эти ребята могут случайно наступить на тебя и не заметить.<br>
+                        — А если я увижу Демона?<br>
+                        — Если увидишь Демона, сынок... просто закрой глаза и представь, что ты дома. Это поможет тебе умереть счастливым.
+                    </p>
+                </article>
+            </div>
+            <h3>Рейтинг анекдотов</h3>
+            <ol>
+                <li>Про геймера — 4.8 ✩</li>
+                <li>Про интернет в аду — 5.0 ✩</li>
+                <li>Гвардеец — 10 ✩✩✩✩✩</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Последний просмотренный контент</h2>
+            <div class="media-description">
+                <div class="media-text">
+                    <h3>«Ангелы смерти»</h3>
+                    <p><strong>Платформа:</strong> RuTube. Длительность первой серии 18:21.</p>
+                    <p><strong>Описание:</strong> Космодесантники прославленного ордена Кровавые Ангелы сражаются с многочисленными врагами Империума человечества.</p>
+                    <p><span class="badge">#заимператора</span></p>
+                </div>
+                <div class="media-thumb">
+                    <figure>
+                        <img src="280x178_2.webp"
+                             alt="Миниатюра видео">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Личный отзыв</h2>
+            <div class="review">
+                <p><span class="rating">★★★★★</span> 5 из 5</p>
+                <p>
+                    Сериал смотрится тяжело и мрачно, но полюбился именно за это. Суровая эстетика, экшен, сильные диалоги — всё это про данный шедевр. 
+                    Он стал для меня ещё одной отправной точкой к дальнейшему погружению в лор Вахи (и окончательной потере личной жизни :P).
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>💬 Цитаты</h2>
+            <blockquote>«В крови да возродимся мы!» <footer>капеллан Рафаэль</footer></blockquote>
+            <blockquote>«Всё может быть восстановлено кровью и железом. И посредством этого найдёт подобие бессмертия.» <footer>Хедраиль</footer></blockquote>
+            <blockquote>*вопль на высоких частотах, выражающий животную ярость, боевой настрой и навязчивое желание пяткой почесать свою мерзопакостную морду*<footer>какой-то рандомный генокрад</footer></blockquote>
+            <h3>Больше пафоса богам пафоса!!</h3>
+        </section>
+
+        <section>
+            <h2>⚽ Расписание матчей команды «Факел» (Воронеж) — 16-е место в РПЛ на сегодня</h2>
+            <p><em>Актуальная таблица: зона стыков. Матчи января–февраля (товарищеские / Кубок, т.к. в РПЛ пауза).</em></p>
+
+            <table>
+                <caption>Календарь игр (прогноз/результаты)</caption>
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Соперник</th>
+                        <th>Счёт</th>
+                        <th>Время (мск)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20 января 2025</td>
+                        <td>Крылья Советов (товар.)</td>
+                        <td><span class="score">2 : 1</span></td>
+                        <td><span class="match-time">16:00</span></td>
+                    </tr>
+                    <tr>
+                        <td>27 января 2025</td>
+                        <td>Пари НН (сборы)</td>
+                        <td><span class="score">0 : 0</span></td>
+                        <td><span class="match-time">14:30</span></td>
+                    </tr>
+                    <tr>
+                        <td>3 февраля 2025</td>
+                        <td>Урал (Кубок)</td>
+                        <td><span class="score">1 : 3</span></td>
+                        <td><span class="match-time">19:00</span></td>
+                    </tr>
+                    <tr>
+                        <td>10 февраля 2025</td>
+                        <td>Торпедо (спарринг)</td>
+                        <td><span class="score">2 : 2</span></td>
+                        <td><span class="match-time">12:00</span></td>
+                    </tr>
+                    <tr>
+                        <td>18 февраля 2025</td>
+                        <td>Балтика (выезд)</td>
+                        <td><span class="score">0 : 2</span></td>
+                        <td><span class="match-time">17:15</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><i>* время и счёт — предварительные или уже состоявшиеся (зимние сборы).</i></p>
+
+            <h3>Прогнозы на ближайший матч</h3>
+            <ol>
+                <li>Победа Факела — 30%</li>
+                <li>Ничья — 25%</li>
+                <li>Поражение — 45%</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer>
+        <address>
+            Made by <strong>Шустрый тормоз</strong><br>
+            Данные по турнирной таблице: на январь-февраль 2025, команда «Факел» (16 место, РПЛ). <br>
+            Одобрено Империумом (или нет (Т_Т;)・・・)
+        </address>
+    </footer>
+    <div class="fine-print">
+        <span class="fine-item">Рекламы не будет!</span>
+        <span class="fine-item">Великий суп</span>
+        <span class="fine-item">Тык</span>
+        <span class="fine-item">Помогите...</span>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
