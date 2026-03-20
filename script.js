@@ -1,10 +1,3 @@
-// ============================================
-// ЛАБОРАТОРНАЯ РАБОТА №5
-// Карточная игра "Космическая битва"
-// С поддержкой галереи изображений
-// ============================================
-
-// ===== БАЗОВЫЙ КЛАСС CARD =====
 class Card {
     // Приватные поля (инкапсуляция)
     #id;
@@ -261,18 +254,18 @@ class HeroCard extends Card {
 class ImageGallery {
     constructor() {
         this.images = [
-            { id: 'img1', url: '6d18bc76ba415966f1c83f5fd20c9a4f.jpg', name: 'Звёздный воин' },
-            { id: 'img2', url: 'b7288a075bfbc09a61de9fbaaa5ceb6e.jpg', name: 'Космический дрон' },
-            { id: 'img3', url: 'ac31d186d4a947d8d5da0f561daf89b4.jpg', name: 'Звёздный дождь' },
-            { id: 'img4', url: 'cd462c8825b18df46c71072c58fbd615.jpg', name: 'Магический щит' },
-            { id: 'img5', url: '27c45658b3d7879d60643ef36cbd610e.jpg', name: 'Кристалл силы' },
-            { id: 'img6', url: '25dadea09aac2622ad336edf05423bf2.jpg', name: 'Древний свиток' },
-            { id: 'img7', url: '4f105aca77424ad514f6d631c3ca6cc1.jpg', name: 'Космический капитан' },
-            { id: 'img8', url: '336a7caf7f4cfb6eedea08b59fbfe736.jpg', name: 'Инквизитор' },
-            { id: 'img9', url: '7f7b2f185494c43d345c0e96e2ef6620.jpg', name: 'Магический кристалл' },
-            { id: 'img10', url: 'e7ed11a989337013840aa4ba1d966792.jpg', name: 'Галактика' },
-            { id: 'img11', url: 'ffd1e79b7d89a2827082be07b35dfb9f.jpg', name: 'Космическая станция' },
-            { id: 'img12', url: 'ee382637d10a6e3618bc9dcab27c7bc9.jpg', name: 'Планета' }
+            { id: 'img1', url: './Images3/6d18bc76ba415966f1c83f5fd20c9a4f.jpg', name: 'Звёздный воин' },
+            { id: 'img2', url: './Images3/b7288a075bfbc09a61de9fbaaa5ceb6e.jpg', name: 'Космический дрон' },
+            { id: 'img3', url: './Images3/ac31d186d4a947d8d5da0f561daf89b4.jpg', name: 'Звёздный дождь' },
+            { id: 'img4', url: './Images3/cd462c8825b18df46c71072c58fbd615.jpg', name: 'Магический щит' },
+            { id: 'img5', url: './Images3/27c45658b3d7879d60643ef36cbd610e.jpg', name: 'Кристалл силы' },
+            { id: 'img6', url: './Images3/25dadea09aac2622ad336edf05423bf2.jpg', name: 'Древний свиток' },
+            { id: 'img7', url: './Images3/4f105aca77424ad514f6d631c3ca6cc1.jpg', name: 'Космический капитан' },
+            { id: 'img8', url: './Images3/336a7caf7f4cfb6eedea08b59fbfe736.jpg', name: 'Инквизитор' },
+            { id: 'img9', url: './Images3/7f7b2f185494c43d345c0e96e2ef6620.jpg', name: 'Магический кристалл' },
+            { id: 'img10', url: './Images3/e7ed11a989337013840aa4ba1d966792.jpg', name: 'Галактика' },
+            { id: 'img11', url: './Images3/ffd1e79b7d89a2827082be07b35dfb9f.jpg', name: 'Космическая станция' },
+            { id: 'img12', url: './Images3/ee382637d10a6e3618bc9dcab27c7bc9.jpg', name: 'Планета' }
         ];
     }
 
